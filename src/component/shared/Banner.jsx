@@ -25,20 +25,12 @@ const heroData = [
 
 const Banner = () => {
     const [slideIndex, setSlideIndex] = useState(0)
-    const nextSlide = () => {
-        if (slideIndex < heroData.length - 1) {
-            setSlideIndex((prevIndex) => prevIndex + 1)
-        }
-        else {
-            setSlideIndex(0)
-        }
-    }
     useEffect(() => {
         const interval = setInterval(() => {
-            nextSlide()
+            setSlideIndex((prev) => (prev + 1) % heroData.length)
         }, 5000)
         return () => clearInterval(interval)
-    }, [nextSlide])
+    }, [])
     return (
         <div className='w-full'>
             <div className='relative h-[610px] w-full'>
@@ -49,25 +41,36 @@ const Banner = () => {
                     className='object-cover z-0'
                 />
                 <div className='absolute inset-0 bg-black/50 z-10'></div>
-                <AnimatePresence mode="wait">
+                <div className='absolute inset-0 z-20 flex flex-col items-center justify-center gap-6 text-center px-4'>
+                    <AnimatePresence mode="wait">
+                        <motion.p
+                            className='text-white text-[22px] md:text-[48px] font-bold'
+                            key={heroData[slideIndex].text}
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -30 }}
+                            transition={{ duration: 0.6 }}
+                        >
+                            {heroData[slideIndex].text}
+                        </motion.p>
+                    </AnimatePresence>
 
-                    <motion.p className='absolute right-[50%] top-[50%] translate-y-[-50%] translate-x-[50%] z-20 text-white text-[22px] md:text-[48px] font-bold' key={heroData[slideIndex].text}
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -30 }}
-                        transition={{ duration: 0.6 }}>Your Ideas, Locked In One Vault</motion.p>
-                </AnimatePresence>
-                <AnimatePresence mode="wait">
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={slideIndex + "-cta"}
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -30 }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
+                        >
+                            <Button className='bg-black text-white text-[16px] font-bold'>
+                                Explore Now <FaArrowRight />
+                            </Button>
+                        </motion.div>
+                    </AnimatePresence>
+                </div>
 
-                    <motion.div key={slideIndex + "-cta"}
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -30 }}
-                        transition={{ duration: 0.6, delay: 0.2 }}>
-                        <Button className='bg-black absolute right-[60%] top-[60%] translate-y-[-50%] translate-x-[50%] z-20 text-white text-[16px] font-bold'> Explore Now<FaArrowRight /></Button>
-                    </motion.div>
-                </AnimatePresence>
-                <div className='absolute z-20 bottom-[10%] right-[60%] translate-y-[-50%] translate-x-[50%] flex gap-2'>
+                <div className='absolute z-20 bottom-[8%] left-1/2 -translate-x-1/2 flex gap-2'>
                     {
                         heroData.map((data, index) => {
                             return <span
@@ -78,8 +81,6 @@ const Banner = () => {
                             ></span>
                         })
                     }
-
-
                 </div>
             </div>
         </div>

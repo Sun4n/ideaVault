@@ -8,13 +8,13 @@ const NavBar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const link = <>
         <li>
-            <Link href="#">Home</Link>
+            <Link href="/">Home</Link>
         </li>
         <li>
-            <Link href="#">Ideas</Link>
+            <Link href="/idea">Ideas</Link>
         </li>
         <li>
-            <Link href="#">Add Idea</Link>
+            <Link href="/add-idea">Add Idea</Link>
         </li>
         <li>
             <Link href="#">My Ideas</Link>
