@@ -1,26 +1,40 @@
 'use client'
+import { authClient } from '@/lib/auth-client';
 import { Check } from '@gravity-ui/icons';
 import { Button, Description, FieldError, Form, Select, Input, Label, TextField, ListBox, TextArea } from '@heroui/react';
 import { div } from 'framer-motion/client';
+import { redirect } from 'next/navigation';
 import React from 'react';
 import toast from 'react-hot-toast';
 
 const AddIdeaPage = () => {
+    const {
+            data: session,
+        } = authClient.useSession()
+        const user = session?.user
     const onSubmit = async(e) => {
         e.preventDefault()
         const fromData = new FormData(e.currentTarget)
         const ideas = Object.fromEntries(fromData.entries())
         console.log(ideas);
+        const myIdea = {
+            userName: user?.name,
+            userId: user?.id,
+            userImage: user?.image,
+            ...ideas
+        }
+        console.log(myIdea);
         const res = await fetch('http://localhost:5000/idea',{
             method:'POST',
             headers:{
                 'content-type':'application/json'
             },
-            body:JSON.stringify(ideas)
+            body:JSON.stringify(myIdea)
         })
         const data = await res.json()
         if (data.acknowledged) {
-            toast.success('Idea added')  
+            toast.success('Idea added')
+            redirect('/my-idea')  
         }
         console.log(data);
 
