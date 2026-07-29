@@ -1,3 +1,4 @@
+import CommentSection from '@/component/shared/CommentSection';
 import { Card } from '@heroui/react';
 import Image from 'next/image';
 import React from 'react';
@@ -21,7 +22,7 @@ const IdeaDetailPage = async ({ params }) => {
                         <h1 className='font-bold text-3xl'>{ideaTitle}</h1>
                         <p className='text-[1rem] '>{shortDescription}</p>
                         <div className=''>
-                            <span className='font-bold text-[20px] flex items-center gap-2'><MdReportProblem  className='text-red-500'></MdReportProblem>Problem: </span>
+                            <span className='font-bold text-[20px] flex items-center gap-2'><MdReportProblem className='text-red-500'></MdReportProblem>Problem: </span>
                             <span className='text-[1rem]'>{problemStatement}</span>
                         </div>
                         <div className=''>
@@ -32,11 +33,13 @@ const IdeaDetailPage = async ({ params }) => {
                             <p>Category:{category}</p>
                             <p>EstimatedBudget:{estimatedBudget}</p>
                         </div>
-
                     </div>
                 </div>
 
             </Card>
+            <div className='w-[500px]'>
+                <CommentSection></CommentSection>
+            </div>
         </div>
     );
 };
