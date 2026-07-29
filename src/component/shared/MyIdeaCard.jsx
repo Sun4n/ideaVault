@@ -4,6 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { LuArrowUpRight } from 'react-icons/lu';
+import EditIdea from './EditIdea';
+import DeleteIdea from './DeleteIdea';
 const MyIdeaCard = ({ data }) => {
     const { _id, imageUrl, category, tag, estimatedBudget, shortDescription } = data
     return (
@@ -16,9 +18,15 @@ const MyIdeaCard = ({ data }) => {
                     <p>Category:{category}</p>
                     <p>Budget:{estimatedBudget}</p>
                 </div>
-                <Link href={`/idea/${_id}`}>
-                    <Button className={"rounded-md"}>Detail <LuArrowUpRight /></Button>
-                </Link>
+                <div className='flex justify-between'>
+                    <Link href={`/idea/${_id}`}>
+                        <Button className={"rounded-md"}>Detail <LuArrowUpRight /></Button>
+                    </Link>
+                    <div className='flex gap-2'>
+                        <EditIdea data={data}></EditIdea>
+                        <DeleteIdea data={data}></DeleteIdea>
+                    </div>
+                </div>
             </div>
         </Card>
     );
