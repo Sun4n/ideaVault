@@ -27,12 +27,12 @@ const IdeaDetailPage = async ({ params }) => {
                             <span className='text-[1rem]'>{problemStatement}</span>
                         </div>
                         <div className=''>
-                            <span className='font-bold text-[20px] flex items-center gap-2'><FaExclamationCircle className='text-yellow-500'></FaExclamationCircle>Solution: </span>
+                            <span className='font-bold text-[20px] flex items-center gap-2'><FaExclamationCircle className='text-green-500'></FaExclamationCircle>Solution: </span>
                             <span className='text-[1rem]'>{proposedSolution}</span>
                         </div>
                         <div className='flex justify-between items-center font-bold text-[20px]'>
                             <p>Category:{category}</p>
-                            <p>EstimatedBudget:{estimatedBudget}</p>
+                            <p>Budget:{estimatedBudget}</p>
                         </div>
                     </div>
                 </div>

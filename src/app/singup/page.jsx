@@ -4,6 +4,7 @@ import { Check } from "@gravity-ui/icons";
 import { Button, Card, Description, FieldError, Form, Input, Label, Separator, TextField } from "@heroui/react";
 import { redirect } from "next/navigation";
 import { IconBase } from "react-icons";
+import { FcGoogle } from "react-icons/fc";
 
 const SingUpPage = () => {
     const onSubmit = async (e) => {
@@ -114,7 +115,7 @@ const SingUpPage = () => {
                     <div>
                         <Button onClick={handleGoogleSignin} className="w-full" variant="tertiary">
                             <IconBase icon="devicon:google" />
-                            Sign in with Google
+                            <FcGoogle />Sign in with Google
                         </Button>
                     </div>
                 </div>

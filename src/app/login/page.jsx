@@ -1,26 +1,33 @@
 "use client"
 import { authClient } from "@/lib/auth-client";
-import { Button, Card, Description, FieldError, Form, Input, Label, TextField } from "@heroui/react";
+import { Button, Card, Description, FieldError, Form, Input, Label, Separator, TextField } from "@heroui/react";
 import { redirect } from "next/navigation";
+import { IconBase } from "react-icons";
+import { FcGoogle } from "react-icons/fc";
 const LoginInPage = () => {
     const onSubmit = async (e) => {
         e.preventDefault()
         const formData = new FormData(e.currentTarget)
         const user = Object.fromEntries(formData.entries())
         console.log(user);
-        const {data,error}=await authClient.signIn.email(
+        const { data, error } = await authClient.signIn.email(
             {
-                email:user.email,
-                password:user.password
+                email: user.email,
+                password: user.password
             }
         );
-        console.log(data,error);
-        if(data){
+        console.log(data, error);
+        if (data) {
             redirect('/')
         }
         if (error) {
             alert(error.message)
         }
+    }
+    const handleGoogleSignin = async () => {
+        await authClient.signIn.social({
+            provider: "google"
+        })
     }
     return (
         <div className="max-w-[1280px] mx-auto">
@@ -71,6 +78,21 @@ const LoginInPage = () => {
 
                     </div>
                 </Form>
+                <div>
+                    <div className="flex justify-center items-center gap-3 ">
+                        <Separator className="w-[150px]" />
+                        <div className="whitespace-nowrap">
+                            Or sing with
+                        </div>
+                        <Separator className="w-[150px]"/>
+                    </div>
+                    <div>
+                        <Button onClick={handleGoogleSignin} className="w-full" variant="tertiary">
+                            <IconBase icon="devicon:google" />
+                            <FcGoogle />Sign in with Google
+                        </Button>
+                    </div>
+                </div>
             </Card>
 
         </div>

@@ -40,7 +40,7 @@ const DeleteIdea = ({comment}) => {
                                 Cancel
                             </Button>
                             <Button onClick={handleDelete} slot="close" variant="danger">
-                                Delete Project
+                                Delete Idea
                             </Button>
                         </AlertDialog.Footer>
                     </AlertDialog.Dialog>
