@@ -29,7 +29,7 @@ const NavBar = () => {
             <Link href="/my-idea">My Ideas</Link>
         </li>
         <li>
-            <Link href="#">My Interactions</Link>
+            <Link href='/my-interactions'>My Interactions</Link>
         </li>
     </>
     return (

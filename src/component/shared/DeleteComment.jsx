@@ -1,21 +1,19 @@
 'use client'
 import { AlertDialog, Button } from '@heroui/react';
 import { redirect } from 'next/navigation';
-import React from 'react';
 import toast from 'react-hot-toast';
 import { MdDelete } from 'react-icons/md';
-
-const DeleteIdea = ({comment}) => {
-    const {_id}=comment
+const DeleteComment = ({comment}) => {
+  const {_id}=comment
     const handleDelete = async()=>{
-        const res = await fetch(`http://localhost:5000/idea/${_id}`,{
+        const res = await fetch(`http://localhost:5000/comment/${_id}`,{
             method:'DELETE',
         })
         const data = await res.json()
         console.log(data);
         if (data.deletedCount>0) {
             toast.error('Idea Delete')
-            redirect('/my-idea')
+            redirect('/my-interactions')
         }
     }
     return (
@@ -51,4 +49,4 @@ const DeleteIdea = ({comment}) => {
     );
 };
 
-export default DeleteIdea;
+export default DeleteComment;

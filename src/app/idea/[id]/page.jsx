@@ -39,7 +39,7 @@ const IdeaDetailPage = async ({ params }) => {
 
             </Card>
             <div className='w-[500px]'>
-                <CommentSection id = {_id}></CommentSection>
+                <CommentSection id = {_id} ideaTitle={ideaTitle}></CommentSection>
             </div>
             <div>
                 <ShowingComment id={_id}></ShowingComment>

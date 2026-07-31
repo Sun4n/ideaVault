@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation';
 
 import React from 'react';
 
-const CommentSection = ({id}) => {
+const CommentSection = ({id,ideaTitle}) => {
     const {
         data: session,
     } = authClient.useSession()
@@ -17,6 +17,7 @@ const CommentSection = ({id}) => {
         const comment = e.target.comment.value
         const commentData = {
             ideaId:id,
+            ideaTitle,
             userName: user?.name,
             userId: user?.id,
             userImage: user?.image,
