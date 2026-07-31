@@ -1,4 +1,5 @@
 import CommentSection from '@/component/shared/CommentSection';
+import ShowingComment from '@/component/shared/ShowingComment';
 import { Card } from '@heroui/react';
 import Image from 'next/image';
 import React from 'react';
@@ -38,7 +39,10 @@ const IdeaDetailPage = async ({ params }) => {
 
             </Card>
             <div className='w-[500px]'>
-                <CommentSection></CommentSection>
+                <CommentSection id = {_id}></CommentSection>
+            </div>
+            <div>
+                <ShowingComment id={_id}></ShowingComment>
             </div>
         </div>
     );
