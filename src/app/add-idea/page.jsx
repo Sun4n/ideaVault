@@ -9,10 +9,10 @@ import toast from 'react-hot-toast';
 
 const AddIdeaPage = () => {
     const {
-            data: session,
-        } = authClient.useSession()
-        const user = session?.user
-    const onSubmit = async(e) => {
+        data: session,
+    } = authClient.useSession()
+    const user = session?.user
+    const onSubmit = async (e) => {
         e.preventDefault()
         const fromData = new FormData(e.currentTarget)
         const ideas = Object.fromEntries(fromData.entries())
@@ -24,46 +24,48 @@ const AddIdeaPage = () => {
             ...ideas
         }
         console.log(myIdea);
-        const res = await fetch('http://localhost:5000/idea',{
-            method:'POST',
-            headers:{
-                'content-type':'application/json'
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/idea`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
             },
-            body:JSON.stringify(myIdea)
+            body: JSON.stringify(myIdea)
         })
         const data = await res.json()
         if (data.acknowledged) {
             toast.success('Idea added')
-            redirect('/my-idea')  
+            redirect('/my-idea')
         }
         console.log(data);
 
     }
     return (
-        <div className='flex justify-center items-center flex-col'>
-            <h1 className='font-bold text-2xl'>Add Idea</h1>
-            <div className='w-3xl'>
-                <form onSubmit={onSubmit}
-                    className="p-10 space-y-8"
-                >
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        {/* Destination Name */}
+        <div className="min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+            <div className="w-full max-w-4xl bg-white rounded-3xl shadow-sm p-4 sm:p-8 md:p-10 border border-gray-100">
+                <h1 className="font-bold text-2xl sm:text-3xl text-center mb-6 sm:mb-8 text-gray-800">
+                    Add Idea
+                </h1>
+
+                <form onSubmit={onSubmit} className="space-y-6 sm:space-y-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+
+
                         <div className="md:col-span-2">
                             <TextField name="ideaTitle" isRequired>
                                 <Label>Idea Title</Label>
-                                <Input placeholder="Idea Title" className="rounded-2xl" />
+                                <Input placeholder="Idea Title" className="rounded-2xl w-full" />
                                 <FieldError />
                             </TextField>
                         </div>
 
-                        {/* Country */}
+
                         <TextField name="targetAudience" isRequired>
                             <Label>Target Audience</Label>
-                            <Input placeholder="Target Audience" className="rounded-2xl" />
+                            <Input placeholder="Target Audience" className="rounded-2xl w-full" />
                             <FieldError />
                         </TextField>
 
-                        {/* Category - Updated Select Component */}
+
                         <div>
                             <Select
                                 name="category"
@@ -72,7 +74,7 @@ const AddIdeaPage = () => {
                                 placeholder="Select category"
                             >
                                 <Label>Category</Label>
-                                <Select.Trigger className="rounded-2xl">
+                                <Select.Trigger className="rounded-2xl w-full">
                                     <Select.Value />
                                     <Select.Indicator />
                                 </Select.Trigger>
@@ -107,90 +109,91 @@ const AddIdeaPage = () => {
                             </Select>
                         </div>
 
-                        {/* Price */}
+
                         <TextField name="estimatedBudget" type="number" isRequired>
                             <Label>Estimated Budget</Label>
                             <Input
                                 type="number"
                                 placeholder="1299"
-                                className="rounded-2xl"
+                                className="rounded-2xl w-full"
                             />
                             <FieldError />
                         </TextField>
 
-                        {/* Duration */}
+
                         <TextField name="tag" isRequired>
                             <Label>Tag</Label>
                             <Input
                                 placeholder="Tag"
-                                className="rounded-2xl"
-                            />
-                            <FieldError />
-                        </TextField>
-                        <TextField name="problemStatement" isRequired>
-                            <Label>Problem Statement
-                            </Label>
-                            <Input
-                                placeholder="Problem Statement"
-                                className="rounded-2xl"
-                            />
-                            <FieldError />
-                        </TextField>
-                        <TextField name="proposedSolution" isRequired>
-                            <Label>Proposed Solution</Label>
-                            <Input
-                                placeholder="Proposed Solution"
-                                className="rounded-2xl"
+                                className="rounded-2xl w-full"
                             />
                             <FieldError />
                         </TextField>
 
-                        {/* Departure Date */}
+
+                        <TextField name="problemStatement" isRequired>
+                            <Label>Problem Statement</Label>
+                            <Input
+                                placeholder="Problem Statement"
+                                className="rounded-2xl w-full"
+                            />
+                            <FieldError />
+                        </TextField>
+
+
+                        <TextField name="proposedSolution" isRequired>
+                            <Label>Proposed Solution</Label>
+                            <Input
+                                placeholder="Proposed Solution"
+                                className="rounded-2xl w-full"
+                            />
+                            <FieldError />
+                        </TextField>
+
+
                         <div className="md:col-span-2">
                             <TextField name="shortDescription" isRequired>
                                 <Label>Short Description</Label>
                                 <TextArea
-                                    placeholder="Describe the travel experience..."
-                                    className="rounded-3xl"
+                                    placeholder="Describe the short summary..."
+                                    className="rounded-3xl w-full"
                                 />
                                 <FieldError />
                             </TextField>
                         </div>
 
-                        {/* Image URL - Removed preview */}
+
                         <div className="md:col-span-2">
                             <TextField name="imageUrl" isRequired>
                                 <Label>Image URL</Label>
                                 <Input
                                     type="url"
-                                    placeholder="https://example.com/bali-paradise.jpg"
-                                    className="rounded-2xl"
+                                    placeholder="https://example.com/image.jpg"
+                                    className="rounded-2xl w-full"
                                 />
                                 <FieldError />
                             </TextField>
                         </div>
 
-                        {/* Description */}
+
                         <div className="md:col-span-2">
                             <TextField name="description" isRequired>
                                 <Label>Description</Label>
                                 <TextArea
-                                    placeholder="Describe the travel experience..."
-                                    className="rounded-3xl"
+                                    placeholder="Describe your idea in detail..."
+                                    className="rounded-3xl w-full"
                                 />
                                 <FieldError />
                             </TextField>
                         </div>
                     </div>
 
-                    {/* Buttons */}
 
                     <Button
                         type="submit"
-                        variant="outline"
-                        className=" rounded-none w-full bg-cyan-500 text-white"
+                        className="rounded-2xl w-full bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-3 transition-colors"
                     >
-                        Add
+                        Add Idea
                     </Button>
                 </form>
             </div>

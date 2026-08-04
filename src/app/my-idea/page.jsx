@@ -11,7 +11,7 @@ const MyIdeaPage =  async() => {
 })
     const user = session?.user
     // console.log(user?.id);
-    const res = await fetch(`http://localhost:5000/idea/user/${user?.id}`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/idea/user/${user?.id}`)
     const myIdeaData = await res.json()
     // console.log(myIdeaData);
     

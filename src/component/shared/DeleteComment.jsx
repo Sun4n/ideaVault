@@ -3,16 +3,17 @@ import { AlertDialog, Button } from '@heroui/react';
 import { redirect } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { MdDelete } from 'react-icons/md';
-const DeleteComment = ({comment}) => {
-  const {_id}=comment
-    const handleDelete = async()=>{
-        const res = await fetch(`http://localhost:5000/comment/${_id}`,{
-            method:'DELETE',
+const DeleteComment = ({ comment }) => {
+    const { _id,userId } = comment
+    console.log(comment);
+    const handleDelete = async () => {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/comment/${userId}`, {
+            method: 'DELETE',
         })
         const data = await res.json()
         console.log(data);
-        if (data.deletedCount>0) {
-            toast.error('Idea Delete')
+        if (data.deletedCount > 0) {
+            toast.error('Delete Commment')
             redirect('/my-interactions')
         }
     }

@@ -25,7 +25,7 @@ const CommentSection = ({id,ideaTitle}) => {
             comment
         }
         // console.log(commentData);
-        const res = await fetch('http://localhost:5000/comment', {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/comment`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -40,7 +40,7 @@ const CommentSection = ({id,ideaTitle}) => {
     }
     return (
         <div>
-            <div className="w-[1200px] space-y-3 mt-3 mb-4">
+            <div className="md:w-[1200px]  space-y-3 mt-3 mb-4">
                 <form onSubmit={handleComment}>
                     <TextArea fullWidth placeholder="Enter the comment" name='comment' />
                     <Button type='submit' slot='close' className={'mt-3'}>Comment</Button>

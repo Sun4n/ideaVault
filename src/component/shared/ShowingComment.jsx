@@ -5,7 +5,7 @@ import DeleteComment from './DeleteComment';
 
 const ShowingComment = async ({ id }) => {
     const ideaId = id
-    const res = await fetch(`http://localhost:5000/comment/${ideaId}`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/comment/${ideaId}`)
     const comments = await res.json()
     console.log(ideaId);
     return (

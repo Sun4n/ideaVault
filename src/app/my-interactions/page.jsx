@@ -13,19 +13,19 @@ const MyInteractionPage = async () => {
     })
     const user = session?.user
     console.log(user?.id);
-    const res = await fetch(`http://localhost:5000/comment/user/${user?.id}`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/comment/user/${user?.id}`)
     const commentData = await res.json()
     console.log(commentData);
     return (
-        <div className='max-w-[1280px] mx-auto w-[1280px]'>
+        <div className='max-w-[1280px] mx-auto md:w-[1280px] w-full'>
             <h1 className='text-[48px] font-bold'>My Inteactions</h1>
             <p className='text-[1.5rem] font-medium'>Comments({commentData.length})</p>
-            <div className='space-y-2 my-2 w-full'>
+            <div className='space-y-2 my-4 w-full'>
                 {
                     commentData.map((comment, indx) => {
-                        return <Card key={indx} >
+                        return <Card key={indx} className='w-[400px] md:w-full'>
                             <div className='flex justify-between items-center'>  
-                                <h1 className='text-[30px] font-bold'>{comment.ideaTitle}</h1>
+                                <h1 className='text-[1rem] md:text-[30px] font-bold'>{comment.ideaTitle}</h1>
                                 <div className='flex gap-3 items-center'>
                                     <EditComment comment={comment}></EditComment>
                                     <DeleteComment comment={comment}></DeleteComment>

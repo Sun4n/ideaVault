@@ -5,6 +5,8 @@ import React, { useState } from 'react';
 import logo from '../../../public/assest/logo.png'
 import Image from 'next/image';
 import { authClient } from '@/lib/auth-client';
+import { ThemeSwitch } from './ThemeSwitch';
+
 const NavBar = () => {
     const {
         data: session,
@@ -33,7 +35,7 @@ const NavBar = () => {
         </li>
     </>
     return (
-        <nav className="sticky top-0 z-40 w-full border-b border-separator bg-[#edede9]  backdrop-blur-lg">
+        <nav className="sticky top-0 z-40 w-full border-b border-separator bg-[#edede9]  backdrop-blur-lg dark:bg-gray-900">
             <header className="flex h-16 items-center justify-between max-w-[1280px] mx-auto w-full px-6">
                 <button
                     className="md:hidden"
@@ -85,6 +87,8 @@ const NavBar = () => {
                             <Link href="/singup"><Button className='bg-black text-white'>Sign Up</Button></Link>
                         </div>
                 }
+                
+                <ThemeSwitch></ThemeSwitch>
 
             </header>
             {isMenuOpen && (

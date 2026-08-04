@@ -5,10 +5,10 @@ import React from 'react';
 import toast from 'react-hot-toast';
 import { MdDelete } from 'react-icons/md';
 
-const DeleteIdea = ({comment}) => {
-    const {_id}=comment
+const DeleteIdea = ({data}) => {
+    const {_id}=data
     const handleDelete = async()=>{
-        const res = await fetch(`http://localhost:5000/idea/${_id}`,{
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/idea/${_id}`,{
             method:'DELETE',
         })
         const data = await res.json()

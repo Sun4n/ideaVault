@@ -14,7 +14,7 @@ const EditComment = ({comment}) => {
             comment:updateComment
         }
         console.log(commentData);
-        const res = await fetch(`http://localhost:5000/comment/${comment._id}`,{
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/comment/${comment._id}`,{
             method:'PATCH',
             headers:{
                 'content-type':'application/json'

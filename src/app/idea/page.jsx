@@ -1,17 +1,16 @@
-import IdeaCard from '@/component/shared/IdeaCard';
-import React from 'react';
 
-const IdeaPage = async() => {
-    const res = await fetch('http://localhost:5000/idea')
+import IdeaList from '@/component/shared/IdeaList';
+import React from 'react';
+export const dynamic = 'force-dynamic';
+
+const IdeaPage = async () => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/idea`)
     const ideas = await res.json()
-    // console.log(ideas);
+    
 
     return (
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-4 max-w-[1280px] mx-auto py-4'>
-            {
-                ideas.map(idea=><IdeaCard key={idea._id} idea={idea}></IdeaCard>)
-            }
-            
+        <div className=' max-w-[1280px] mx-auto py-4'>
+            <IdeaList ideas={ideas}></IdeaList>
         </div>
     );
 };
