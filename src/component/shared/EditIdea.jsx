@@ -23,7 +23,7 @@ const EditIdea = ({ data }) => {
         const data = await res.json()
         console.log(data);
         if (data. modifiedCount>0) {
-            toast.success('Change Idea')
+            toast.success('Update Idea')
             redirect('/my-idea')
         }
 

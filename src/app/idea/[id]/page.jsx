@@ -7,6 +7,7 @@ import Image from 'next/image';
 import React from 'react';
 import { FaExclamationCircle } from 'react-icons/fa';
 import { MdReportProblem } from 'react-icons/md';
+export const dynamic = 'force-dynamic';
 const IdeaDetailPage = async ({ params }) => {
     const { id } = await params
     const token = await auth.api.getToken({
@@ -14,6 +15,7 @@ const IdeaDetailPage = async ({ params }) => {
     })
     console.log(token);
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/idea/${id}`,{
+        cache:'no-store',
         headers : {
         authorization : `Bearer ${token?.token}`
       }

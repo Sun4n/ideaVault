@@ -5,15 +5,22 @@ import { auth } from '@/lib/auth';
 import { Card } from '@heroui/react';
 import { headers } from 'next/headers';
 import Image from 'next/image';
-
+export const dynamic = 'force-dynamic';
 
 const MyInteractionPage = async () => {
     const session = await auth.api.getSession({
         headers: await headers() // you need to pass the headers object.
     })
+    const token = await auth.api.getToken({
+        headers: await headers()
+    })
     const user = session?.user
     console.log(user?.id);
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/comment/user/${user?.id}`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/comment/user/${user?.id}`, {
+        headers: {
+            authorization: `Bearer ${token?.token}`
+        }
+    })
     const commentData = await res.json()
     console.log(commentData);
     return (
@@ -24,7 +31,7 @@ const MyInteractionPage = async () => {
                 {
                     commentData.map((comment, indx) => {
                         return <Card key={indx} className='w-[400px] md:w-full'>
-                            <div className='flex justify-between items-center'>  
+                            <div className='flex justify-between items-center'>
                                 <h1 className='text-[1rem] md:text-[30px] font-bold'>{comment.ideaTitle}</h1>
                                 <div className='flex gap-3 items-center'>
                                     <EditComment comment={comment}></EditComment>
