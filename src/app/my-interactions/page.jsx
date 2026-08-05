@@ -1,55 +1,75 @@
-
 import DeleteComment from '@/component/shared/DeleteComment';
 import EditComment from '@/component/shared/EditComment';
 import { auth } from '@/lib/auth';
 import { Card } from '@heroui/react';
 import { headers } from 'next/headers';
 import Image from 'next/image';
+
 export const dynamic = 'force-dynamic';
 
 const MyInteractionPage = async () => {
     const session = await auth.api.getSession({
-        headers: await headers() 
-    })
-    const token = await auth.api.getToken({
         headers: await headers()
     })
     const user = session?.user
-    console.log(user?.id);
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/comment/user/${user?.id}`, {
+
+    if (!user?.id) {
+        return (
+            <div className='mx-[100%] my-[50%] w-full font-bold text-[48px]'>
+                <div>Please login</div>
+            </div>
+        )
+    }
+
+    const token = await auth.api.getToken({
+        headers: await headers()
+    })
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/comment/user/${user.id}`, {
         headers: {
             authorization: `Bearer ${token?.token}`
         }
     })
-    const commentData = await res.json()
-    console.log(commentData);
+
+    let commentData = []
+    if (res.ok) {
+        const data = await res.json()
+        if (Array.isArray(data)) {
+            commentData = data
+        }
+    } else {
+        console.error('Failed to fetch comments:', res.status)
+    }
+
     return (
         <div className='max-w-[1280px] mx-auto md:w-[1280px] w-full'>
             <h1 className='text-[48px] font-bold'>My Inteactions</h1>
             <p className='text-[1.5rem] font-medium'>Comments({commentData.length})</p>
             <div className='space-y-2 my-4 w-full'>
                 {
-                    commentData.map((comment, indx) => {
-                        return <Card key={indx} className='w-[400px] md:w-full'>
-                            <div className='flex justify-between items-center'>
-                                <h1 className='text-[1rem] md:text-[30px] font-bold'>{comment.ideaTitle}</h1>
-                                <div className='flex gap-3 items-center'>
-                                    <EditComment comment={comment}></EditComment>
-                                    <DeleteComment comment={comment}></DeleteComment>
+                    commentData.length !== 0
+                        ? commentData.map((comment, indx) => {
+                            return <Card key={indx} className='w-[400px] md:w-full'>
+                                <div className='flex justify-between items-center'>
+                                    <h1 className='text-[1rem] md:text-[30px] font-bold'>{comment.ideaTitle}</h1>
+                                    <div className='flex gap-3 items-center'>
+                                        <EditComment comment={comment}></EditComment>
+                                        <DeleteComment comment={comment}></DeleteComment>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className='flex gap-3 items-center justify-start'>
-                                <div className='mt-5'>
-                                    <Image src={comment.userImage} alt='user image' width={60} height={60} className='rounded-full object-cover'></Image>
+                                <div className='flex gap-3 items-center justify-start'>
+                                    <div className='mt-5'>
+                                        <Image src={comment.userImage} alt='user image' width={60} height={60} className='rounded-full object-cover'></Image>
+                                    </div>
+                                    <div className=''>
+                                        <h1 className='font-bold text-[1rem]'>{comment.userName}</h1>
+                                        <p>{comment.date}</p>
+                                        <p>{comment.comment}</p>
+                                    </div>
                                 </div>
-                                <div className=''>
-                                    <h1 className='font-bold text-[1rem]'>{comment.userName}</h1>
-                                    <p>{comment.date}</p>
-                                    <p>{comment.comment}</p>
-                                </div>
-                            </div>
-                        </Card>
-                    })
+                            </Card>
+                        })
+                        : <div className='w-full font-bold text-[24px]'>No comments yet</div>
                 }
             </div>
         </div>
