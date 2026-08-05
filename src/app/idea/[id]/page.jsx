@@ -24,7 +24,7 @@ const IdeaDetailPage = async ({ params }) => {
 
     if (!res.ok) {
         return (
-            <div className='mx-[100%] my-[50%] w-full font-bold text-[48px]'>
+            <div className='w-full flex justify-center items-center py-20 font-bold text-[48px] text-center'>
                 <div>Idea not found</div>
             </div>
         )
@@ -34,7 +34,7 @@ const IdeaDetailPage = async ({ params }) => {
 
     if (!idea || !idea._id) {
         return (
-            <div className='mx-[100%] my-[50%] w-full font-bold text-[48px]'>
+            <div className='w-full flex justify-center items-center py-20 font-bold text-[48px] text-center'>
                 <div>Idea not found</div>
             </div>
         )
