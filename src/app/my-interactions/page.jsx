@@ -9,7 +9,7 @@ export const dynamic = 'force-dynamic';
 
 const MyInteractionPage = async () => {
     const session = await auth.api.getSession({
-        headers: await headers() // you need to pass the headers object.
+        headers: await headers() 
     })
     const token = await auth.api.getToken({
         headers: await headers()

@@ -6,6 +6,7 @@ import logo from '../../../public/assest/logo.png'
 import Image from 'next/image';
 import { authClient } from '@/lib/auth-client';
 import { ThemeSwitch } from './ThemeSwitch';
+import { redirect } from 'next/navigation';
 
 const NavBar = () => {
     const {
@@ -15,8 +16,11 @@ const NavBar = () => {
     // console.log(user?.image);
     const handleLogOut = async () => {
         await authClient.signOut();
+        redirect('/')
     }
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false)
+    // console.log(isOpen);
     const link = <>
         <li>
             <Link href="/">Home</Link>
@@ -36,7 +40,7 @@ const NavBar = () => {
     </>
     return (
         <nav className="sticky top-0 z-40 w-full border-b border-separator bg-[#edede9]  backdrop-blur-lg dark:bg-gray-900">
-            <header className="flex h-16 items-center justify-between max-w-[1280px] mx-auto w-full px-6">
+            <header className="flex h-16 items-center justify-between max-w-[1280px] mx-auto w-full px-6 gap-2">
                 <button
                     className="md:hidden"
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -74,12 +78,25 @@ const NavBar = () => {
                 </ul>
 
                 {
-                    user ? <div className='flex items-center gap-4'>
-                        <Avatar>
-                            <Avatar.Image alt="user image" src={user?.image} />
+                    user ? <div className='relative'>
+                        <Avatar >
+                            <Avatar.Image alt="user image" src={user?.image}
+                                onClick={() => setIsOpen(!isOpen)} />
                             <Avatar.Fallback>{user?.name}</Avatar.Fallback>
                         </Avatar>
-                        <Button onClick={handleLogOut} className='bg-black text-white'>LogOut</Button>
+                        {
+                            isOpen && <div className='absolute right-0 top-[calc(100%+8px)] w-48 rounded-lg bg-white shadow-lg border border-gray-200 p-3 z-50'>
+                                <div className='px-2 pb-2 border-b border-gray-100'>
+                                    <Link href={'/profile'}>Profile</Link>
+                                </div>
+                                <Button
+                                    onClick={handleLogOut}
+                                    className='w-full mt-2 bg-black text-white'
+                                >
+                                    LogOut
+                                </Button>
+                            </div>
+                        }
                     </div>
                         :
                         <div className="flex items-center gap-2">
@@ -87,8 +104,10 @@ const NavBar = () => {
                             <Link href="/singup"><Button className='bg-black text-white'>Sign Up</Button></Link>
                         </div>
                 }
-                
-                <ThemeSwitch></ThemeSwitch>
+
+                <div>
+                    <ThemeSwitch></ThemeSwitch>
+                </div>
 
             </header>
             {isMenuOpen && (
