@@ -76,8 +76,8 @@ const IdeaDetailPage = async ({ params }) => {
                         </div>
 
                         <div className='flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 pt-2 border-t font-semibold text-lg sm:text-xl text-gray-800'>
-                            <p className='dark:text-white'><span className='font-bold dark:text-white'>Category:</span> {category}</p>
-                            <p className='dark:text-white'><span className='font-bold dark:text-white'>Budget:</span> {estimatedBudget}</p>
+                            <p className='dark:text-white'><span className='font-bold text-gray-800  '>Category:</span> {category}</p>
+                            <p className='dark:text-white'><span className='font-bold text-gray-800 '>Budget:</span> {estimatedBudget}</p>
                         </div>
                     </div>
                 </div>
