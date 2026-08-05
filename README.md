@@ -8,8 +8,6 @@ Live Link:[https://qurbani-haat-git-main-kazisunan68-7530s-projects.vercel.app/]
 
 -NEXT.js
 
--React
-
 -Tailwind CSS
 
 -DaisyUI
