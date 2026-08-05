@@ -7,26 +7,45 @@ import Image from 'next/image';
 import React from 'react';
 import { FaExclamationCircle } from 'react-icons/fa';
 import { MdReportProblem } from 'react-icons/md';
+
 export const dynamic = 'force-dynamic';
+
 const IdeaDetailPage = async ({ params }) => {
     const { id } = await params
     const token = await auth.api.getToken({
-      headers : await headers()
+        headers: await headers()
     })
-    console.log(token);
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/idea/${id}`,{
-        headers : {
-        authorization : `Bearer ${token?.token}`
-      }
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/idea/${id}`, {
+        headers: {
+            authorization: `Bearer ${token?.token}`
+        }
     })
+
+    if (!res.ok) {
+        return (
+            <div className='mx-[100%] my-[50%] w-full font-bold text-[48px]'>
+                <div>Idea not found</div>
+            </div>
+        )
+    }
+
     const idea = await res.json();
-    console.log(idea);
+
+    if (!idea || !idea._id) {
+        return (
+            <div className='mx-[100%] my-[50%] w-full font-bold text-[48px]'>
+                <div>Idea not found</div>
+            </div>
+        )
+    }
+
     const { _id, imageUrl, ideaTitle, category, problemStatement, estimatedBudget, shortDescription, proposedSolution } = idea
+
     return (
         <div className='max-w-[1280px] mx-auto px-4 sm:px-6 py-6 space-y-8 w-full '>
             <Card className='p-4 sm:p-6'>
                 <div className='flex flex-col lg:flex-row gap-6 items-start'>
-                    {/* Image Container */}
                     <div className='w-full lg:w-1/2 flex-shrink-0'>
                         <div className='relative w-full h-[250px] sm:h-[350px] lg:h-[400px]'>
                             <Image
@@ -62,7 +81,7 @@ const IdeaDetailPage = async ({ params }) => {
                         </div>
                     </div>
                 </div>
-            </Card>            
+            </Card>
             <div className='space-y-6'>
                 <div className='w-full max-w-full sm:max-w-[500px]'>
                     <CommentSection id={_id} ideaTitle={ideaTitle} />

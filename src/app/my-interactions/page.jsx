@@ -5,7 +5,7 @@ import { Card } from '@heroui/react';
 import { headers } from 'next/headers';
 import Image from 'next/image';
 
-export const dynamic = 'force-dynamic';
+
 
 const MyInteractionPage = async () => {
     const session = await auth.api.getSession({

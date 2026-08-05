@@ -11,7 +11,6 @@ const MyIdeaPage = async () => {
     })
     const user = session?.user
 
-    // user না থাকলে fetch-ই করার দরকার নেই
     if (!user?.id) {
         return (
             <div className='mx-[100%] my-[50%] w-full font-bold text-[48px]'>
@@ -30,7 +29,7 @@ const MyIdeaPage = async () => {
         }
     })
 
-    // response fail করলে array না ধরে নিয়ে সেফ ভাবে হ্যান্ডেল করো
+
     let myIdeaData = []
     if (res.ok) {
         const data = await res.json()
