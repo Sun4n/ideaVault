@@ -1,37 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ideaVault 
 
-## Getting Started
+IdeaVault is a startup idea sharing platform where users can discover innovative ideas, share their own startup concepts, and engage with the community through comments and discussions.
 
-First, run the development server:
+Live Link:[https://qurbani-haat-git-main-kazisunan68-7530s-projects.vercel.app/](https://idea-vault-amber-three.vercel.app/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# Technologies Used
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+-NEXT.js
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+-React
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+-Tailwind CSS
 
-## Learn More
+-DaisyUI
 
-To learn more about Next.js, take a look at the following resources:
+-React Icons
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+-Express.js
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+-MongoDB
+ 
 
-## Deploy on Vercel
+# Key Features
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- User Authentication with Email/Password and Google Login
+  
+- Protected Routes using JWT Authentication
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# ideaVault
+- Add New Startup Ideas
+
+- Update and Delete Own Ideas
+
+- Browse All Startup Ideas
+
+- View Detailed Idea Information
+
+- Comment System (Add, Edit, Delete)
+
+- Search Ideas by Title
+
+- Filter Ideas by Category
+
+- Trending Ideas Section
+
+- Dark / Light Theme Toggle
+
+- Responsive Design for Mobile, Tablet, and Desktop
+
+- Dynamic Page Titles
+
+- Custom 404 Page
+
+- Toast Notifications for User Actions
+
+#  NPM Packages Used
+
+-npm install mongodb
+
+-npm install better-auth
+
+-npm install @better-auth/mongo-adapter
+
+#  Responsive Design
+
+-Mobile
+-Dekstop
+-Tablet
+
+
+
