@@ -22,8 +22,8 @@ const EditProfile = ({ data }) => {
             },
             body: JSON.stringify(editedUser)
         })
-        const data = await res.json()
-        console.log(data);
+        const editdata = await res.json()
+        console.log(editdata);
         if (data.modifiedCount > 0) {
             toast.success('Update Profile')
             redirect('/profile')

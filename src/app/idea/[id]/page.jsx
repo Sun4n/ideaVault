@@ -15,7 +15,6 @@ const IdeaDetailPage = async ({ params }) => {
     })
     console.log(token);
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/idea/${id}`,{
-        cache:'no-store',
         headers : {
         authorization : `Bearer ${token?.token}`
       }
